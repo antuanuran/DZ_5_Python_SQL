@@ -1,24 +1,53 @@
-from Client import create_db, add_clients, add_phones, update_client, remove_phone, remove_client, find_client
-import psycopg2 as pg
+from Client import Client
 
 
-conn = pg.connect("dbname=Home_5 user=postgres password=postgres")
-create_db(conn)
+# Переменные
 
-add_phones(conn, "МТС", "8-916-272-06-66")
-add_phones(conn, "Билайн", "8-908-252-06-55")
+dsn = "dbname=Home_5 user=postgres password=postgres"
 
-add_clients(conn, "Уранов", "Антон", "antoha@mail.ru", 2)
-add_clients(conn, "Иванов", "Денис", "ivan@mail.ru", 2)
-add_clients(conn, "Петров", "Женя", "petrov@mail.ru", 1)
+operat = 'MTS'
+operat2 = 'Beeline'
 
-update_client(conn, "Уранов 2", "Антон 2", "Почта 2", "2", 2)
+numb = '8-916-272-06-59'
+numb2 = '8-960-222-00-58'
 
-remove_phone(conn, 1)
+first_name = 'Уранов'
+first_name2 = 'Иванов'
+first_name3 = 'Петров'
 
-remove_client(conn, "1")
+last_name = 'Антон'
+last_name2 = 'Денис'
+last_name3 = 'Жора'
 
-find_client(conn, "УраноЖ", "", "petrov@mail.ru", "")
+email = 'anton@ya.ru'
+email2 = 'denis@ya.ru'
+email3 = 'gora@ya.ru'
+
+# Методы
+
+client = Client(dsn)
+
+client.create_db()
+
+client.add_phones(operat, numb)
+client.add_phones(operat2, numb2)
+
+client.add_clients(first_name, last_name, email, 1)
+client.add_clients(first_name2, last_name2, email2, 1)
+client.add_clients(first_name3, last_name3, email3, 2)
+
+client.update_client('Uranov', 'Anton', 'ura@ya.ru', 2, 2)
+
+client.remove_phone(2)
+
+client.remove_client('1')
+
+client.find_client('Петров', '', '', '')
+
+
+
+
+
 
 
 
